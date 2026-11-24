@@ -3,6 +3,7 @@
 Groups the videos on the [Sonal Audio Old Bhajan](https://www.youtube.com/@SONALAUDIOOLDBHAJAN) YouTube channel into single-night programs, using only video titles and descriptions. No video was watched or listened to.
 
 - **All events:** 118 events covering 650 of the channel's 1,016 videos (snapshot from November 2026).
+- **All videos:** every upload (1,016 videos and 1 short), searchable across title and description, with filters for singer, recording year, type and event membership, and sorting by upload date, recording year, length or views. This tab uses the shared code in `tools/_shared/`.
 - **Per-singer tabs:** Kandas Bapu and Laxman Barot. Each tab lists every video that names the singer, shows the full multi-part events those videos belong to, and keeps hashtag-only matches in a separate group.
 
 ## How the grouping works
@@ -16,6 +17,7 @@ Groups the videos on the [Sonal Audio Old Bhajan](https://www.youtube.com/@SONAL
 
 - `index.html`: the page
 - `data/events.csv`, `data/events.json`: all events, one row per video, in part order
+- `data/sonal-videos.csv`: every upload, with type, upload date, views, recording year and singers found in the text, and its event if any
 - `data/kandas-bapu.csv`, `data/laxman-barot.csv`: per-singer lists. The `Match` column says whether the video names the singer, is part of the same event, or has the hashtag only.
 - `scripts/build.py`: builds `events.json`/`events.csv` from the channel metadata (manual event rules are inside)
 - `scripts/page.py`: builds `index.html` and the per-singer CSVs. To add a singer, add an entry to `PEOPLE`.
@@ -26,7 +28,8 @@ Groups the videos on the [Sonal Audio Old Bhajan](https://www.youtube.com/@SONAL
 yt-dlp --flat-playlist -j "https://www.youtube.com/@SONALAUDIOOLDBHAJAN/videos" > flat.jsonl
 # fetch full metadata for each video (yt-dlp --skip-download -j), merge into all.json
 python scripts/build.py <dir-with-all.json> <output-dir>
-python scripts/page.py <dir-with-all.json>    # run inside the output dir
+# also save every upload (videos + shorts, with a "kind" field) as <dir>/sonal/all_listing.json
+python scripts/page.py <dir-with-all.json>    # run inside this folder, with events.json copied next to it
 ```
 
 The manual rules in `build.py` refer to videos by their position in the channel's upload list, so check them again after the channel adds videos.

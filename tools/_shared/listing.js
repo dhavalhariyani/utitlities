@@ -8,7 +8,8 @@
     try { history.replaceState(null, '', '#' + t); } catch (e) {}
   };
   document.querySelectorAll('nav button').forEach(function (b) { b.onclick = function () { show(b.dataset.t); }; });
-  if (location.hash === '#events') show('events');
+  var h = location.hash.slice(1);
+  if (h && document.querySelector('section.tab#' + CSS.escape(h))) show(h);
   // filter options
   DATA.singers.forEach(function (s) { var o = document.createElement('option'); o.textContent = s; $('fs').appendChild(o); });
   DATA.years.forEach(function (y) { var o = document.createElement('option'); o.textContent = y; $('fy').appendChild(o); });

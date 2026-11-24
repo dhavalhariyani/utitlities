@@ -10,6 +10,7 @@ tools/<tool-name>/      one folder per tool
   index.html            the page itself
   data/                 data files the page links to
   scripts/              scripts that generate the page/data
+tools/_shared/          code shared by several tools (the "All videos" search/filter listing)
 .nojekyll               serve files as-is (no Jekyll build)
 ```
 

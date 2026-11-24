@@ -22,8 +22,7 @@ raju-mokaria/index.html     channel page
 raju-mokaria/data/          raju-videos.csv (every upload), raju-events.csv
 naran-valani/...            same for Naran Valani
 scripts/channel_page.py     builds a channel page; event rules live in EVENTS
-scripts/listing.js          search/filter code embedded in each page
-scripts/style.css           styles embedded in each page
+../_shared/                 listing code (listing.js, listing.css, listing_data.py) shared with sonal-audio-events
 ```
 
 "Singers named" and "recording year" come from pattern matching on the title and description text. They're hints, not verified credits.
