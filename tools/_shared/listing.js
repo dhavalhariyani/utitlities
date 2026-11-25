@@ -53,10 +53,13 @@
     $('res').innerHTML = current.slice(0, shown).map(function (it) {
       var chips = it.sg.map(function (s) { return '<span class="chip">' + esc(s) + '</span>'; }).join('');
       if (it.ev) chips += '<span class="chip e">Event: ' + esc(it.ev) + '</span>';
-      return '<li><a class="t" href="https://youtu.be/' + it.id + '" target="_blank" rel="noopener">' + hl(it.t, words) + '</a>' +
+      var url = 'https://youtu.be/' + it.id;
+      return '<li><a class="th" href="' + url + '" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true">' +
+        '<img src="https://i.ytimg.com/vi/' + it.id + '/mqdefault.jpg" alt="" width="160" height="90" loading="lazy" decoding="async"></a>' +
+        '<div class="b"><a class="t" href="' + url + '" target="_blank" rel="noopener">' + hl(it.t, words) + '</a>' +
         '<div class="m"><span>' + it.k + '</span><span>' + esc(it.dur) + '</span><span>uploaded ' + fmtUp(it.up) + '</span>' +
         (it.y ? '<span>recorded ' + it.y + '</span>' : '') + '<span>' + it.v.toLocaleString() + ' views</span>' + chips + '</div>' +
-        (it.d ? '<div class="x">' + hl(it.d, words) + '</div>' : '') + '</li>';
+        (it.d ? '<div class="x">' + hl(it.d, words) + '</div>' : '') + '</div></li>';
     }).join('');
     $('more').hidden = current.length <= shown;
   }

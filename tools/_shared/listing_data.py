@@ -13,6 +13,14 @@ DR = r'(?<!\d)(\d{1,2})\s*[/.\\-]\s*(\d{1,2})\s*[/.\\-]\s*((?:19|20)\d{2}|\d{2})
 KIND = {'videos': 'Video', 'streams': 'Live', 'shorts': 'Short'}
 
 
+def thumb_li(video_id, title, dur):
+    """Event-list row with a small lazy-loaded YouTube thumbnail (served by i.ytimg.com)."""
+    url = f'https://youtu.be/{video_id}'
+    return (f'<li class="vt"><img class="tn" src="https://i.ytimg.com/vi/{video_id}/mqdefault.jpg" alt="" '
+            f'width="96" height="54" loading="lazy" decoding="async">'
+            f'<span><a href="{url}" target="_blank" rel="noopener">{html.escape(title)}</a> <span class="d">{dur}</span></span></li>')
+
+
 def secs(s):
     t = 0
     for x in (s or '0').split(':'):

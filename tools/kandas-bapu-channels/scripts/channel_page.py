@@ -79,7 +79,7 @@ SINGERS = [
 SINGERS = [(n, re.compile(p, re.I)) for n, p in SINGERS]
 
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', '_shared'))
-from listing_data import build_items, listing_data_json, listing_section, assets, write_videos_csv, secs, hm
+from listing_data import build_items, listing_data_json, listing_section, assets, write_videos_csv, secs, hm, thumb_li
 
 events = []
 ev_of = {}
@@ -99,7 +99,7 @@ grouped = sum(len(e['ids']) for e in events)
 byid = {it['id']: it for it in items}
 
 def li(it):
-    return f'<li><a href="https://youtu.be/{it["id"]}" target="_blank" rel="noopener">{esc(it["t"])}</a> <span class="d">{it["dur"]}</span></li>'
+    return thumb_li(it['id'], it['t'], it['dur'])
 def card(e):
     k = 'Date unknown' if e['key'] == '~' else e['key']
     flag = f'<p class="flag">⚠ {esc(e["conf"])}</p>' if e['conf'] else ''

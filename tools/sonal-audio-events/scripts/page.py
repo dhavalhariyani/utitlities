@@ -11,9 +11,12 @@ def hm(s):
     h, m = divmod(s // 60, 60)
     return f"{h}h {m:02d}m" if h else f"{m}m"
 esc = html.escape
+import os
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', '_shared'))
+from listing_data import thumb_li
 def li(v):
     dur = v.get('duration_string') or v.get('dur') or ''
-    return f'<li><a href="https://youtu.be/{v["id"]}" target="_blank" rel="noopener">{esc(v["title"])}</a> <span class="d">{dur}</span></li>'
+    return thumb_li(v['id'], ' '.join(v['title'].split()), dur)
 def card(e):
     k = 'Date unknown' if e['key'] == '~' else e['key']
     note = '' if e['conf'] == 'Confirmed' else f'<p class="flag">⚠ {esc(e["conf"])}</p>'
