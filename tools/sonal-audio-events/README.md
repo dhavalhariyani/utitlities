@@ -6,6 +6,9 @@ Groups the videos on the [Sonal Audio Old Bhajan](https://www.youtube.com/@SONAL
 - **All videos:** every upload (1,016 videos and 1 short), searchable across title and description, with filters for singer, recording year, type and event membership, and sorting by upload date, recording year, length or views. This tab uses the shared code in `tools/_shared/`.
 - **Per-singer tabs:** Kandas Bapu and Laxman Barot. Each tab lists every video that names the singer, shows the full multi-part events those videos belong to, and keeps hashtag-only matches in a separate group.
 
+- **Playlists:** 492 YouTube playlists (17,304 videos) from the big studio channels that name Narayan Swami, Kandas Bapu, Laxman Barot or Ramdas Gondaliya. Loaded from `data/playlists.json` when the tab opens.
+- **Kandas Bapu – all found:** 2,982 videos from 215 channels whose title names him, with 35 single-night events built from shared dates, places, numbered series and program playlists (weaker groups marked ⚠). The rest are standalone clips. Loaded from `data/kandas-all.json`.
+
 ## How the grouping works
 
 1. If a title or description has a date (e.g. `23-1-1994`), every video with the same date forms one event.
@@ -20,6 +23,7 @@ Groups the videos on the [Sonal Audio Old Bhajan](https://www.youtube.com/@SONAL
 - `data/sonal-videos.csv`: every upload, with type, upload date, views, recording year and singers found in the text, and its event if any
 - `data/kandas-bapu.csv`, `data/laxman-barot.csv`: per-singer lists. The `Match` column says whether the video names the singer, is part of the same event, or has the hashtag only.
 - `scripts/build.py`: builds `events.json`/`events.csv` from the channel metadata (manual event rules are inside)
+- `scripts/playlists.py`, `scripts/found.py`: build the Playlists and Kandas Bapu tabs from crawled YouTube data (input formats are in each script's docstring); they patch `index.html` in place
 - `scripts/page.py`: builds `index.html` and the per-singer CSVs. To add a singer, add an entry to `PEOPLE`.
 
 ## Regenerating
